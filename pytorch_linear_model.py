@@ -1,8 +1,7 @@
 import torch
-from torch.autograd import Variable
 
-x_data = Variable(torch.Tensor([[1.0], [2.0], [3.0]]))
-y_data = Variable(torch.Tensor([[2.0], [4.0], [6.0]]))
+x_data = torch.Tensor([[1.0], [2.0], [3.0]], requires_grad=True)
+y_data = torch.Tensor([[2.0], [4.0], [6.0]])
 
 
 class Model(torch.nn.Module):
@@ -27,6 +26,6 @@ for epoch in range(500):
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-hour_var = Variable(torch.Tensor([[4.0]]))
-y_pred = model(hour_var)
-print("predict (after training)",  4, model(hour_var).data[0][0])
+y = torch.Tensor([[4.0]])
+y_pred = model(y)
+print("predict (after training)",  4, model(y).data[0][0])
